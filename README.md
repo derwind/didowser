@@ -33,9 +33,25 @@ Run the browser engine with your application entry point (e.g., `app.jsx`).
 bun didowser.ts app.jsx
 ```
 
-### 3. Creating Your Own App
+### 3. Setup Didact
 
-Create a file (e.g., `my-app.jsx`) that exports your main component. The engine expects `module.exports = { App };`.
+Ensure your `didact.js` exports the `Didact` object at the end of the file:
+
+```javascript
+/* ... existing code ... */
+
+const Didact = {
+  createElement,
+  render,
+  useState,
+}
+
+module.exports = Didact;
+```
+
+### 4. Creating Your Own App
+
+Create a file (e.g., `app.jsx`) that exports your main component. The engine expects `module.exports = { App };`.
 
 ```jsx
 const Didact = require("./didact.js");
@@ -51,6 +67,10 @@ function App() {
     </div>
   );
 }
+
+const element = <App />
+const container = document.getElementById("root");
+Didact.render(element, container);
 
 module.exports = { App };
 ```
