@@ -224,9 +224,34 @@ class BrowserEngine {
             this.moveFocus(1);
         } else if (keyStr === '\r') { // Enter
             this.triggerClick();
+        } else if (keyStr === 'd') { // Dump Tree
+            log('--- Dump Tree ---');
+            this.dumpTree(this.rootElement);
+            log('-----------------');
         }
 
         this.render(); // Immediate re-render on input
+    }
+
+    dumpTree(node: Node, depth: number = 0) {
+        const indent = "  ".repeat(depth);
+        let info = `${indent}${node.nodeName}`;
+        if (node instanceof Text) {
+            info += `: ${String(node.nodeValue ?? '').trim()}`;
+        }
+        // Props for elements
+        if (node instanceof Element) {
+            const props = Object.entries(node.props)
+                .map(([k, v]) => `${k}=${JSON.stringify(v)}`)
+                .join(' ');
+            if (props) info += ` (${props})`;
+        }
+
+        log(info);
+
+        for (const child of node.childNodes) {
+            this.dumpTree(child, depth + 1);
+        }
     }
 
     moveFocus(direction: number) {
