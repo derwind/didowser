@@ -75,6 +75,16 @@ Didact.render(element, container);
 module.exports = { App };
 ```
 
+## Controls
+
+- `Up Arrow`: Move focus to previous element
+- `Down Arrow`: Move focus to next element
+- `Enter`: Trigger click event on focused element
+- `d`: Dump current DOM tree to `debug.log`
+- `q` or `Ctrl+C`: Quit application
+
+> **Note:** Currently, only `<button>` elements are focusable.
+
 ## Architecture
 
 Didowser acts as a host environment for Didact:
