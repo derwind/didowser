@@ -241,10 +241,10 @@ class BrowserEngine {
         }
         // Props for elements
         if (node instanceof Element) {
-             const props = Object.entries(node.props)
-                .map(([k, v]) => `${k}=${JSON.stringify(v)}`)
-                .join(' ');
-             if (props) info += ` (${props})`;
+            const props = Object.entries(node.props)
+               .map(([k, v]) => `${k}=${JSON.stringify(v)}`)
+               .join(' ');
+            if (props) info += ` (${props})`;
         }
 
         log(info);
